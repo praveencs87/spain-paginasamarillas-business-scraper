@@ -1,0 +1,36 @@
+{
+    "title": "Spain PaginasAmarillas Scraper Input",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "keyword": {
+            "title": "Search Query (Qué buscas)",
+            "type": "string",
+            "description": "The specific business category or name (e.g., 'inmobiliaria', 'restaurante', 'abogado').",
+            "editor": "textfield",
+            "prefill": "inmobiliaria"
+        },
+        "location": {
+            "title": "Location (Dónde)",
+            "type": "string",
+            "description": "City or province in Spain (e.g., 'Madrid', 'Barcelona', 'Valencia').",
+            "editor": "textfield",
+            "prefill": "Madrid"
+        },
+        "maxLeads": {
+            "title": "Maximum Leads",
+            "type": "integer",
+            "description": "Maximum number of Spanish business leads to extract.",
+            "default": 100,
+            "minimum": 1
+        },
+        "proxyConfiguration": {
+            "title": "Proxy Configuration",
+            "type": "object",
+            "description": "Proxy settings. Apify Residential Proxy (Spain targeted) is highly required.",
+            "prefill": { "useApifyProxy": true },
+            "editor": "proxy"
+        }
+    },
+    "required": ["keyword", "location"]
+}

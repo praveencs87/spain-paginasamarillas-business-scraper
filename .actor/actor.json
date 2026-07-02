@@ -1,0 +1,37 @@
+{
+    "actorSpecification": 1,
+    "name": "spain-paginasamarillas-business-scraper",
+    "title": "Spain PaginasAmarillas Scraper | B2B Leads",
+    "description": "Extract verified Spanish businesses, real estate agencies, and local services from PaginasAmarillas.es. Premium EU B2B leads.",
+    "version": "1.0",
+    "input": "./input_schema.json",
+    "dockerfile": "./Dockerfile",
+    "minMemoryMbytes": 1024,
+    "maxMemoryMbytes": 4096,
+    "pricingModel": "PAY_PER_EVENT",
+    "pricingEvents": [
+        {
+            "eventName": "apify-actor-start",
+            "pricePerEvent": 0.25,
+            "description": "Base fee for starting the crawler (Playwright overhead)"
+        },
+        {
+            "eventName": "lead-extracted",
+            "pricePerEvent": 0.0040,
+            "description": "Charged per Spanish Business lead successfully extracted ($4.00 per 1k leads)"
+        }
+    ],
+    "isPublic": true,
+    "seoTitle": "PaginasAmarillas Scraper | Spain Business Directory Extractor",
+    "seoDescription": "Scrape verified Spanish businesses, restaurants, real estate agencies, and B2B leads from PaginasAmarillas.es. High-quality EU data extraction.",
+    "categories": [
+        "LEAD_GENERATION",
+        "BUSINESS",
+        "REAL_ESTATE"
+    ],
+    "defaultRunOptions": {
+        "build": "latest",
+        "timeoutSecs": 3600,
+        "memoryMbytes": 1024
+    }
+}
