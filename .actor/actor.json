@@ -17,7 +17,7 @@
         },
         {
             "eventName": "lead-extracted",
-            "pricePerEvent": 0.0040,
+            "pricePerEvent": 0.004,
             "description": "Charged per Spanish Business lead successfully extracted ($4.00 per 1k leads)"
         }
     ],
@@ -31,7 +31,7 @@
     ],
     "defaultRunOptions": {
         "build": "latest",
-        "timeoutSecs": 3600,
-        "memoryMbytes": 1024
+        "timeoutSecs": 1800,
+        "memoryMbytes": 4096
     }
 }
