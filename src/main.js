@@ -58,7 +58,8 @@ try {
                 const businessName = (await nameElement.innerText()).trim();
 
                 const addressElement = await item.$('.commerce-address, [itemprop="address"], .address');
-                const address = addressElement ? (await addressElement.innerText()).trim().replace(/\s+/g, ' ') : '';
+                const rawAddress = addressElement ? (await addressElement.innerText()).replace(/\s+/g, ' ').trim() : '';
+                const address = rawAddress.replace(/(\d{5})/g, ' $1 ').replace(/\s{2,}/g, ' ').trim();
 
                 // Category
                 const catElement = await item.$('.category, .commerce-category, [itemprop="category"]');
