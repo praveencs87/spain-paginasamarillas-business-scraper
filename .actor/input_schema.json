@@ -3,19 +3,14 @@
     "type": "object",
     "schemaVersion": 1,
     "properties": {
-        "keyword": {
-            "title": "Search Query (Qué buscas)",
-            "type": "string",
-            "description": "The specific business category or name (e.g., 'inmobiliaria', 'restaurante', 'abogado').",
-            "editor": "textfield",
-            "prefill": "inmobiliaria"
-        },
-        "location": {
-            "title": "Location (Dónde)",
-            "type": "string",
-            "description": "City or province in Spain (e.g., 'Madrid', 'Barcelona', 'Valencia').",
-            "editor": "textfield",
-            "prefill": "Madrid"
+        "startUrls": {
+            "title": "Start URLs",
+            "type": "array",
+            "description": "List of search URLs to scrape.",
+            "editor": "requestListSources",
+            "prefill": [
+                { "url": "https://www.paginasamarillas.es/search/inmobiliaria/all-ma/madrid/all-is/madrid/all-ba/all-pu/all-nc/1?what=inmobiliaria&where=Madrid" }
+            ]
         },
         "maxLeads": {
             "title": "Maximum Leads",
@@ -32,5 +27,5 @@
             "editor": "proxy"
         }
     },
-    "required": ["keyword", "location"]
+    "required": ["startUrls"]
 }

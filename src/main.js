@@ -7,8 +7,7 @@ await Actor.init();
 try {
     const input = await Actor.getInput();
     const { 
-        keyword = 'inmobiliaria', 
-        location = 'Madrid', 
+        startUrls = [],
         maxLeads = 100,
         proxyConfiguration 
     } = input || {};
@@ -19,7 +18,7 @@ try {
         apifyProxyCountry: 'ES'
     });
 
-    log.info(`Searching PaginasAmarillas (Spain) for "${keyword}" in "${location}"`);
+    log.info(`Searching PaginasAmarillas (Spain)...`);
     
     await Actor.charge({ eventName: 'apify-actor-start', count: 1 });
 
@@ -64,7 +63,7 @@ try {
 
                 // Category
                 const catElement = await item.$('.category, .commerce-category, [itemprop="category"]');
-                const industry = catElement ? (await catElement.innerText()).trim() : keyword;
+                const industry = catElement ? (await catElement.innerText()).trim() : '';
 
                 // Phones
                 // Note: might be obscured by a "ver telefono" button that triggers a modal or reveals text
@@ -126,14 +125,14 @@ try {
         }
     });
 
-    const formatKeyword = encodeURIComponent(keyword.toLowerCase());
-    const formatLocation = encodeURIComponent(location.toLowerCase());
-    // Generic PaginasAmarillas Search URL structure
-    const startUrl = `https://www.paginasamarillas.es/search/${formatKeyword}/all-ma/${formatLocation}/all-is/${formatLocation}/all-ba/all-pu/all-nc/1`;
-    
-    await crawler.addRequests([{
-        url: startUrl
-    }]);
+    if (startUrls && startUrls.length > 0) {
+        for (const req of startUrls) {
+            await crawler.addRequests([{ url: typeof req === 'string' ? req : req.url }]);
+        }
+    } else {
+        log.warning('No startUrls provided. Using default.');
+        await crawler.addRequests([{ url: 'https://www.paginasamarillas.es/search/inmobiliaria/all-ma/madrid/all-is/madrid/all-ba/all-pu/all-nc/1?what=inmobiliaria&where=Madrid' }]);
+    }
 
     armKillSwitch(crawler);
     await crawler.run();
